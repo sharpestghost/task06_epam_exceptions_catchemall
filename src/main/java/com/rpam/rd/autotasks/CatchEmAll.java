@@ -14,13 +14,25 @@ public final class CatchEmAll {
     public static Exception exception;
 
     private CatchEmAll() {
-        exception = null;
     }
 
-    public static void riskyMethod() throws Exception {
+    public static void riskyMethod()  {
         if (exception != null) {
-            throw exception;
+            try {
+                throw exception;
+            } catch (FileNotFoundException e) {
+                throw new IllegalArgumentException(RESOURCE_MISSING_MESSAGE, e);
+            } catch (IOException e) {
+                throw new IllegalArgumentException(RESOURCE_ERROR_MESSAGE, e);
+            } catch (ArithmeticException | NumberFormatException e) {
+                System.err.print(e.getMessage());
+            } catch (Exception e) {
+                doNothing();
+            }
         }
+    }
+
+    private static void doNothing() {
     }
 
     public static void main(String[] args) {
@@ -41,22 +53,9 @@ public final class CatchEmAll {
                 default:
                     break;
             }
+            riskyMethod();
         }
-        catchException();
     }
 
-    private static void catchException() {
-        try {
-            riskyMethod();
-        } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException(RESOURCE_MISSING_MESSAGE, e);
-        } catch (IOException e) {
-            throw new IllegalArgumentException(RESOURCE_ERROR_MESSAGE, e);
-        } catch (ArithmeticException | NumberFormatException e) {
-            System.err.print(e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
 
