@@ -7,7 +7,7 @@ public final class CatchEmAll {
 
     private static final String RESOURCE_MISSING_MESSAGE = "Resource is missing";
     private static final String RESOURCE_ERROR_MESSAGE = "Resource error";
-    static Exception exception = new FileNotFoundException();
+    public static Exception exception = new FileNotFoundException();
 
     private CatchEmAll() {
     }
