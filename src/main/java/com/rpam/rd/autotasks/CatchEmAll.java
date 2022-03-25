@@ -3,13 +3,13 @@ package com.rpam.rd.autotasks;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public final class CatchEmAll {
+class CatchEmAll {
 
+    protected static Exception exception = new FileNotFoundException();
     private static final String RESOURCE_MISSING_MESSAGE = "Resource is missing";
     private static final String RESOURCE_ERROR_MESSAGE = "Resource error";
-    public static Exception exception = new FileNotFoundException();
 
-    private CatchEmAll() {
+    CatchEmAll() {
     }
 
     public static void riskyMethod() throws Exception {
@@ -27,5 +27,7 @@ public final class CatchEmAll {
             System.err.print(e.getMessage());
         }
     }
+
 }
+
 
